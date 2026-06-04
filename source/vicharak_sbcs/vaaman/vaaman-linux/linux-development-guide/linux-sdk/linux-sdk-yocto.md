@@ -200,3 +200,55 @@ Username : root
 
 Password : root
 ```
+
+### Creating patches for Yocto
+
+When you modify source (kernel, u-boot, or other components) outside Yocto,
+generate a Git patch and add it to the appropriate BitBake recipe so Yocto can
+apply it during the build. This is a general workflow you can reuse for any
+component.
+
+1. Make the change in the upstream repository and commit it:
+
+```bash
+git add <modified-files>
+git commit -m "Brief description of the change"
+```
+
+2. Generate one or more patch files:
+
+```bash
+# single commit
+git format-patch -1
+# range of commits
+git format-patch <base>..HEAD
+```
+
+3. Copy the patch(es) into the Yocto layer's recipe `files/` directory:
+
+```bash
+cp 0001-*.patch <yocto-path>/meta-<layer>/recipes-*/<recipe>/files/
+```
+
+4. Update the recipe to include the patch(s) by adding to `SRC_URI` (in the
+   recipe `.bb` file):
+
+```bitbake
+SRC_URI += "file://0001-My-change.patch"
+```
+
+5. Apply and build the recipe (the `-c patch` task applies patches):
+
+```bash
+bitbake <recipe> -f -c patch
+bitbake <recipe>
+```
+
+Notes:
+- Use the actual recipe name (for example `linux-rockchip` or `u-boot-rockchip`).
+- If you produce multiple patches, list each one in `SRC_URI`.
+- Keep patch commit messages short and descriptive; follow your project's
+  patch naming conventions if any.
+
+
+

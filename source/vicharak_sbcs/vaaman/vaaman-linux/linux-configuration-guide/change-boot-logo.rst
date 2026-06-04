@@ -114,28 +114,9 @@ Replace both logo files:
 - ``logo.bmp``
 - ``logo_kernel.bmp``
 
-Create a patch
---------------
 
-Commit the changes:
-
-.. code:: bash
-
-   git add logo.bmp logo_kernel.bmp
-   git commit -m "Replace boot logo"
-
-Generate the patch:
-
-.. code:: bash
-
-   git format-patch -1
-
-Copy the generated patch into the Yocto layer:
-
-.. code:: bash
-
-   cp 0001-Replace-boot-logo.patch \
-   <yocto-path>/meta-rockchip/recipes-kernel/linux/files/
+For instructions on creating and adding patches to Yocto recipes, see the
+Yocto SDK guide: :doc:`Yocto SDK guide <../linux-development-guide/linux-sdk/linux-sdk-yocto>`
 
 Applying the patch in Yocto
 ---------------------------
