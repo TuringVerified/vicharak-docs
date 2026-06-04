@@ -42,9 +42,10 @@ Rebuild the kernel and DTBs:
 Install or flash the newly built kernel image and DTBs to the board
 using your preferred flashing or deployment method.
 
-
 The exact flashing procedure depends on your Linux distribution,
 bootloader setup, and storage medium (SD card, eMMC, NVMe, etc.).
+
+.. _change-boot-logo-yocto:
 
 Yocto
 -------------
