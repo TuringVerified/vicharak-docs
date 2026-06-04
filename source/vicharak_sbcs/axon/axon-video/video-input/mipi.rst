@@ -507,7 +507,7 @@ Run:
      v4l2src device=/dev/video<camera_device_number> io-mode=mmap ! \
      videoscale ! \
      video/x-raw,width=1280,height=720 ! \
-     mpph264enc bps=2000000 gop=1 ! \
+     mpph264enc bps=2000000 gop=15 ! \
      h264parse config-interval=-1 ! \
      rtspclientsink protocols=tcp location=rtsp://127.0.0.1:8554/cam
 
